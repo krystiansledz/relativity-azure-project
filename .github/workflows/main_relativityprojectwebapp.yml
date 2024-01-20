@@ -1,0 +1,57 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
+      - ".husky"
+      - ".github/**"
+      - "**/*.csv"
+      - .env*
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Create .env file
+        env: 
+          MONGO: ${{ secrets.MONGO }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_URL: ${{ secrets.AUTH_URL }}
+        run: |
+          touch .env
+          echo MONGO=$MONGO >> .env
+          echo AUTH_SECRET=$AUTH_SECRET >> .env
+          echo AUTH_URL=$AUTH_URL >> .env
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run test --if-present
+          npm run build --if-present
+
+      - name: Zip artifact for deployment
+        run: zip next.zip ./* .next .env -qr
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'RelativityProjectWebApp'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9D8C006AD9CF455C821DE5B2629045D1 }}
+          package: next.zip
