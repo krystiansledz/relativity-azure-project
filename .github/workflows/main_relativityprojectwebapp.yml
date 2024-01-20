@@ -31,10 +31,12 @@ jobs:
         env: 
           MONGO: ${{ secrets.MONGO }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_URL: ${{ secrets.AUTH_URL }}
         run: |
           touch .env
           echo MONGO=$MONGO >> .env
           echo AUTH_SECRET=$AUTH_SECRET >> .env
+          echo AUTH_URL=$AUTH_URL >> .env
 
       - name: npm install, build, and test
         run: |
