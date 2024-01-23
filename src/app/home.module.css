@@ -36,6 +36,15 @@
   color: var(--text);
 }
 
+.buttonerror {
+  padding: 20px;
+  min-width: 120px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--error);
+}
+
 .brands{
   width: 500px;
   height: 50px;

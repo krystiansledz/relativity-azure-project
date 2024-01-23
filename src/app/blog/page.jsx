@@ -2,7 +2,7 @@ import PostCard from "@/components/postCard/postCard";
 import styles from "./blog.module.css";
 
 const getData = async () => {
-  const res = await fetch(`${process.env.API_URL}/blog`, {cache: "no-cache" });
+  const res = await fetch(`api/blog`, {cache: "no-cache" });
 
   if (!res.ok) {
     throw new Error("Something went wrong");
