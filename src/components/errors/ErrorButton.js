@@ -5,13 +5,10 @@ import styles from "@/app/home.module.css";
 
 
 const ErrorButton = () => {
-  console.log(process.env)
-
   const handleClick = async () => {
     try {
       const response = await fetch(`${process.env.API_URL}/server-error`, {method: 'POST'});
       const data = await response.json();
-      console.log(data)
       alert(`Response: ${response.status}, Message: ${data.message}`);
     } catch (error) {
       console.error('Error fetching data:', error);

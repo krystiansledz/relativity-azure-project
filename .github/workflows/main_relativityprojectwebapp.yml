@@ -33,12 +33,16 @@ jobs:
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           AUTH_URL: ${{ vars.AUTH_URL }}
           API_URL: ${{ vars.API_URL }}
+          APPLICATION_INSIGHTS_INSTRUMENTATION_KEY: ${{ secrets.APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }}
+          APPLICATION_INSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATION_INSIGHTS_CONNECTION_STRING }}
         run: |
           touch .env
           echo MONGO=$MONGO >> .env
           echo AUTH_SECRET=$AUTH_SECRET >> .env
           echo AUTH_URL=$AUTH_URL >> .env
           echo API_URL=$API_URL >> .env
+          echo APPLICATION_INSIGHTS_INSTRUMENTATION_KEY=$APPLICATION_INSIGHTS_INSTRUMENTATION_KEY >> .env
+          echo APPLICATION_INSIGHTS_CONNECTION_STRING=$APPLICATION_INSIGHTS_CONNECTION_STRING >> .env
 
       - name: npm install, build, and test
         run: |
