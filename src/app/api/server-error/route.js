@@ -1,6 +1,4 @@
-import { NextResponse } from 'next/server'
-
-export async function GET() {
+export async function POST() {
   const test = {}
 
   test.a.b; // throw 500 error
