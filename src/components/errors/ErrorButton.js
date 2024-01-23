@@ -3,10 +3,13 @@
 import React from 'react';
 import styles from "@/app/home.module.css";
 
+
 const ErrorButton = () => {
+  console.log(process.env)
+
   const handleClick = async () => {
     try {
-      const response = await fetch(`api/server-error`);
+      const response = await fetch(`${process.env.API_URL}/server-error`);
       const data = await response.json();
       console.log(data)
       alert(`Response: ${response.status}, Message: ${data.message}`);

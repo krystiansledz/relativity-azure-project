@@ -7,6 +7,9 @@ const nextConfig = {
         hostname: "images.pexels.com"
       }
     ]
+  },
+  env: {
+    API_URL: process.env.API_URL,
   }
 }
 

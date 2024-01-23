@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
 const getData = async (slug) => {
-  const res = await fetch(`api/blog/${slug}`,  {cache: "no-cache"});
+  const res = await fetch(`${process.env.API_URL}/blog/${slug}`,  {cache: "no-cache"});
 
   if (!res.ok) {
     throw new Error("Something went wrong");
